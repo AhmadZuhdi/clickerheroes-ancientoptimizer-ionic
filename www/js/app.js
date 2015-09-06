@@ -57,7 +57,7 @@ angular.module('starter', ['ionic'])
   });
 }).controller('app', ['$scope', '$ionicModal', function($scope, $ionicModal){
 
-  $scope.version = '1.0.0'
+  $scope.version = '1.0.1'
 
   $scope.includeSoulAfterAscension = false
   $scope.ignoreIris = true
@@ -310,7 +310,25 @@ angular.module('starter', ['ionic'])
     return(optimalLevel > 0 ? Math.round(optimalLevel) : 0);
   }
 
+  $scope.toggleHideAncient = function (ancient){
+    ancient.hide = true
+  }
+
   $scope.hideAncient = function (anc){
+
+    if($scope.playstyle.toLowerCase() == 'idle') {
+
+      if(anc.clicking) {
+
+        return true
+      }
+    }
+
+    if(anc.hide) {
+
+      return true
+    }
+
     if(anc.maxLevel > 0) {
 
       if(anc.levelOld == anc.maxLevel) {

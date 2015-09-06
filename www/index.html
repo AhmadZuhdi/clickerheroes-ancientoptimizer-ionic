@@ -54,9 +54,9 @@
             </label>
             Include souls after ascension
           </ion-item>
-          <ion-item class="item-checkbox">
+          <ion-item class="item-checkbox" ng-hide="true">
             <label for="" class="checkbox">
-              <input type="checkbox" ng-click="toggleIgnoreIris()" checked="checked">
+              <input type="checkbox" ng-click="toggleIgnoreIris()" ng-checked="true" ng-model="ignoreIris">
             </label>
             Ignore Iris
           </ion-item>
@@ -80,10 +80,17 @@
             <button class="button button-full button-balanced" ng-click="optimize()">Do the math!</button>
           </ion-item>
           <ion-item class="item-divider"></ion-item>
-          <ion-item class="item-input item-stacked-label" ng-repeat="(key, value) in anc track by $index" ng-hide="hideAncient(value)">
+          <ion-item class="item-input item-stacked-label" ng-repeat="(key, value) in anc track by $index" ng-hide="$index !== 0">
             <span class="input-label" ng-bind="value.Name"></span>
             <input type="number" ng-model="value.levelOld">
             <span class="input-label" ng-show="value.levelNew">Target : <b ng-bind="value.levelNew"></b></span>
+          </ion-item>
+          <ion-item class="item-divider"></ion-item>
+          <ion-item class="item-input item-stacked-label" ng-repeat="(key, value) in anc track by $index" ng-hide="$index == 0 || hideAncient(value)">
+            <span class="input-label" ng-bind="value.Name"></span>
+            <input type="number" ng-model="value.levelOld">
+            <span class="input-label" ng-show="value.levelNew">Target : <b ng-bind="value.levelNew"></b></span>
+            <ion-option-button class="button-assertive" ng-click="toggleHideAncient(value)">Hide</ion-option-button>
           </ion-item>
         </ion-list>
       </ion-content>
